@@ -16,15 +16,15 @@ def main():
     MODEL_NAME = "bert-base-uncased"
     PROJECT_NAME = "bert-ticket-router"
     
-    # 1. Fetch prepared data from data_processor
+    # Fetch prepared data from data_processor
     tokenized_datasets, id2label, label2id, tokenizer = prepare_data(MODEL_NAME)
     
-    # 2. Configure W&B tracking environment variables
+    # Configure W&B tracking environment variables
     os.environ["WANDB_PROJECT"] = PROJECT_NAME
     os.environ["WANDB_LOG_MODEL"] = "checkpoint"
     wandb.init(project=PROJECT_NAME, name="bert-base-initial-run")
     
-    # 3. Initialize the base model with classification heads sized for our labels
+    # Initialize the base model with classification heads sized for our labels
     model = AutoModelForSequenceClassification.from_pretrained(
         MODEL_NAME,
         num_labels=len(id2label),
@@ -32,7 +32,7 @@ def main():
         label2id=label2id
     )
     
-    # 4. Define training configurations
+    # Define training configurations
     training_args = TrainingArguments(
         output_dir="./results",
         num_train_epochs=3,
@@ -50,13 +50,13 @@ def main():
         report_to="wandb"
     )
     
-    # 5. Execute Training
+    # Execute Training
     trainer = Trainer(
         model=model,
         args=training_args,
         train_dataset=tokenized_datasets["train"],
         eval_dataset=tokenized_datasets["test"],
-        processing_class=tokenizer,  # <--- UPDATED to support transformers v4.46+
+        processing_class=tokenizer,
         compute_metrics=compute_metrics
     )
     
