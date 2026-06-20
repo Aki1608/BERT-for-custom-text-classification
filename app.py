@@ -13,7 +13,7 @@ def route_ticket(text):
         return "System Error: The fine-tuned model has not been trained yet. Please run 'python train.py' in your console first.", {}
     
     category, confidence_scores = predictor.predict(text)
-    return f"🏷️ **Assigned Routing Department:** `{category.upper()}`", confidence_scores
+    return f"**Assigned Routing Department:** `{category.upper()}`", confidence_scores
 
 # Create the Gradio interface
 with gr.Blocks(theme=gr.themes.Soft()) as demo:
