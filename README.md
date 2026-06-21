@@ -1,4 +1,4 @@
-# 🎫 Smart Support Ticket Router (BERT Fine-Tuning)
+# Smart Support Ticket Router (BERT Fine-Tuning)
 
 An enterprise-grade NLP pipeline that fine-tunes a Transformer model (`bert-base-uncased`) to automatically categorize and route customer support tickets. This project uses the Hugging Face Trainer API for optimized training, **Weights & Biases (W&B)** for real-time experiment tracking, and **Gradio** for a clean, interactive user interface.
 
@@ -6,7 +6,7 @@ Trained on the `PolyAI/banking77` dataset, this model can accurately classify in
 
 ---
 
-## ✨ Core Features
+## Core Features
 
 * **Custom BERT Fine-Tuning:** Specializes a pre-trained Google BERT model to understand domain-specific customer service language.
 * **Live Experiment Tracking:** Fully integrated with Weights & Biases (W&B) to monitor training loss, validation accuracy, F1-scores, and resource utilization in real-time.
@@ -16,18 +16,17 @@ Trained on the `PolyAI/banking77` dataset, this model can accurately classify in
 
 ---
 
-## 📂 Project Structure
+## Project Structure
 
 * `data_processor.py`: Orchestrates dataset downloading, label extraction (ID to string mapping), and text tokenization.
 * `train.py`: The core training engine. Initializes the model, sets hyperparameters, connects to W&B, and runs the Hugging Face Trainer loop.
 * `predictor.py`: The inference backend. Loads the locally saved fine-tuned model and processes raw string inputs into mathematical category predictions.
 * `app.py`: The Gradio web interface connecting user inputs to the inference backend.
 * `requirements.txt`: The lean, unpinned dependency manifest (with a specific datasets version pinned to support legacy Hugging Face scripts).
-* `.env`: Configuration file for private API keys.
 
 ---
 
-## ⚙️ Prerequisites
+## Prerequisites
 
 **1. Python Version:** This project requires **Python 3.10, 3.11, or 3.12**.
 
@@ -36,12 +35,12 @@ You will need a free account at wandb.ai to track the training experiments.
 
 ---
 
-## 🚀 Installation & Setup
+## Installation & Setup
 
 **1. Clone the repository:**
 
-    git clone https://github.com/yourusername/bert-ticket-router.git
-    cd bert-ticket-router
+    git clone https://github.com/yourusername/BERT-for-custom-text-classification.git
+    cd BERT-for-custom-text-classification
 
 **2. Create and activate a virtual environment:**
 
@@ -68,7 +67,7 @@ Create a `.env` file in the root directory and add your Weights & Biases API key
 
 ---
 
-## 🏃‍♂️ Running the Pipeline
+## Running the Pipeline
 
 ### Step 1: Train the Model
 Before you can run the UI, you must train the BERT model. Make sure your virtual environment is active, then run:
@@ -85,8 +84,3 @@ Once the model is fully trained and saved locally, start the Gradio interface:
 Open the provided `localhost` URL (usually http://127.0.0.1:7860) in your browser to start routing fake customer support tickets!
 
 ---
-
-## 🛠️ Troubleshooting
-
-**"Dataset scripts are no longer supported..." Error:**
-If you run into an error regarding `banking77.py` and remote code, ensure your virtual environment is active and that you have installed the exact dependencies from your requirements text file. We specifically use `datasets<4.0.0` and the `trust_remote_code=True` flag in `data_processor.py` to securely load this classic benchmark dataset.
